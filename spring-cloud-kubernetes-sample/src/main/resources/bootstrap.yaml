@@ -4,11 +4,14 @@ spring:
     namespace: yunlong
   cloud:
     kubernetes:
+      client:
+        namespace: ${spring.application.namespace}
       reload:
         enabled: true
         mode: polling
         period: 5000
       config:
+        namespace: ${spring.application.namespace}
         sources:
           - name: ${spring.application.name}
             namespace: ${spring.application.namespace}
