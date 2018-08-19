@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  generation: 1
+  labels:
+    run: echo
+  name: echo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: echo
+  template:
+    metadata:
+      labels:
+        run: echo
+    spec:
+      containers:
+      - image: jmalloc/echo-server
+        imagePullPolicy: Always
+        name: echo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: echo
+  name: echo
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: echo
+  type: ClusterIP
