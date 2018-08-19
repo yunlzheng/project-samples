@@ -1,0 +1,11 @@
+management:
+  endpoint:
+    restart:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+
+app:
+  message: hello from local properties
