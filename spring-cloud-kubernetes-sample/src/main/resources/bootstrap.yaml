@@ -1,17 +1,14 @@
 spring:
   application:
     name: kube-application
-    namespace: yunlong
   cloud:
     kubernetes:
       client:
-        namespace: ${spring.application.namespace}
+        namespace: yunlong
       reload:
         enabled: true
         mode: polling
         period: 5000
       config:
-        namespace: ${spring.application.namespace}
         sources:
           - name: ${spring.application.name}
-            namespace: ${spring.application.namespace}

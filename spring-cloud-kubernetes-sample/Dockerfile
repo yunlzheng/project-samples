@@ -1,4 +1,4 @@
-FROM gradle:4.9.0-jre8 AS builder
+FROM java:8 AS builder
 
 RUN mkdir -p .gradle && chmod 777 .gradle
 ADD gradle ./gradle

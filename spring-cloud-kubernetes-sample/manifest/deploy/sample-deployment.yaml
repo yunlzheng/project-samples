@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: kube-app
+  name: kube-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: kube-app
+  template:
+    metadata:
+      labels:
+        run: kube-app
+    spec:
+      containers:
+      - image: registry.cn-hangzhou.aliyuncs.com/k8s-mirrors/kube-app:latest
+        imagePullPolicy: Always
+        name: kube-app
