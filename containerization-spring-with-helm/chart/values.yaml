@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: registry.cn-hangzhou.aliyuncs.com/k8s-mirrors/spring-sample
+  tag: stable
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
