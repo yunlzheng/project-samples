@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kube-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: kube-app.kubernetes101.com
+    http:
+      paths:
+      - backend:
+          serviceName: kube-app
+          servicePort: 80

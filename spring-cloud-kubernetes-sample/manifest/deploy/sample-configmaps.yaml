@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kube-application
+  name: kube-app
 data:
   application.yaml: |-
     app:

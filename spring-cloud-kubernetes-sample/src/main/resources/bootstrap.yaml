@@ -1,6 +1,6 @@
 spring:
   application:
-    name: kube-application
+    name: kube-app
   cloud:
     kubernetes:
       client:
