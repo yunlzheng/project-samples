@@ -18,7 +18,10 @@ pipeline {
 
     stage('public helm') {
       steps {
-        def data = readYaml(file: 'containerization-spring-with-helm/charts/values.yaml')
+        script {
+          def data = readYaml(file: 'containerization-spring-with-helm/charts/values.yaml')
+        }
+        
       }
     }
 
