@@ -3,12 +3,15 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
             sh '''cd containerization-spring-with-helm
-docker build -t yunlzheng/spring-sample .'''
-        sh '''docker push yunlzheng/spring-sample'''
-        }
+                docker build -t yunlzheng/spring-sample .'''
       }
+    }
+
+    stage('public') {
+        withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
+          sh 'docker push yunlzheng/spring-sample'
+        }
     }
   }
 }
