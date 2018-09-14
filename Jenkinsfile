@@ -1,9 +1,19 @@
 pipeline {
   agent any
+
+  environment {
+        HELM_USERNAME = credentials('HELM_USERNAME')
+        HELM_PASSWORD = credentials('HELM_PASSWORD')
+  }
+
   stages {
     stage('build') {
       steps {
 
+        println  $HELM_USERNAME
+        println  $HELM_PASSWORD
+
+        
         dir('containerization-spring-with-helm') {
           sh 'docker build -t yunlzheng/spring-sample:$GIT_COMMIT .'
         }
