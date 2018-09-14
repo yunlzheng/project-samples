@@ -21,7 +21,7 @@ pipeline {
         script {
           def filename = 'containerization-spring-with-helm/chart/values.yaml'
           def data = readYaml file: filename
-          data.image.tag = $env.GIT_COMMIT
+          data.image.tag = env.GIT_COMMIT
           sh "rm $filename"
           writeYaml file: filename, data: data
         }
