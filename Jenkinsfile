@@ -10,8 +10,8 @@ pipeline {
     stage('build') {
       steps {
 
-        println  $HELM_USERNAME
-        println  $HELM_PASSWORD
+        println  env.HELM_USERNAME
+        println  env.HELM_PASSWORD
 
         
         dir('containerization-spring-with-helm') {
