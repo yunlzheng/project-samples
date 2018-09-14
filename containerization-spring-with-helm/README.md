@@ -2,5 +2,5 @@ Spring Sample
 ===========
 
 ```
-docker build -t registry.cn-hangzhou.aliyuncs.com/k8s-mirrors/spring-sample .
+docker build -t yunlzheng/spring-app . # change to your own repo
 ```
