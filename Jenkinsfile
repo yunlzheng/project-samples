@@ -19,7 +19,7 @@ pipeline {
     stage('public helm') {
       steps {
         script {
-          def filename = 'containerization-spring-with-helm/charts/values.yaml'
+          def filename = 'containerization-spring-with-helm/chart/values.yaml'
           def data = readYaml file: filename
           data.image.tag = '$GIT_COMMIT'
           sh "rm $filename"
