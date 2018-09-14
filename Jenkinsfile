@@ -18,8 +18,7 @@ pipeline {
 
     stage('public helm') {
       steps {
-        data = readYaml(file: 'containerization-spring-with-helm/charts/values.yaml')
-        data.image.tag = '0.0.1-$GIT_COMMIT'
+        def data = readYaml(file: 'containerization-spring-with-helm/charts/values.yaml')
       }
     }
 
