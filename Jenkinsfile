@@ -3,12 +3,10 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        
-        // This step should not normally be used in your script. Consult the inline help for details.
-        withDockerServer([credentialsId: '8c3bafdf-c8cb-49d5-a46c-93bf815430fb', uri: 'registry.cn-hangzhou.aliyuncs.com']) {
+        withDockerRegistry([credentialsId: 'aliyuncr', url: 'https://index.docker.io/v1/']) {
             sh '''cd containerization-spring-with-helm
-docker build -t registry.cn-hangzhou.aliyuncs.com/k8s-mirrors/spring-sample .'''
-        sh '''docker push registry.cn-hangzhou.aliyuncs.com/k8s-mirrors/spring-sample'''
+docker build -t yunlzheng .'''
+        sh '''docker push yunlzheng/spring-sample'''
         }
       }
     }
