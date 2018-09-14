@@ -41,7 +41,7 @@ pipeline {
         }
 
         dir('containerization-spring-with-helm') {
-          sh 'helm push chart https://repomanage.rdc.aliyun.com/helm_repositories/26125-play-helm --username=kHKvnX --password=WsCH7zuHH2  --version=$GIT_COMMIT'
+          sh 'helm push chart https://repomanage.rdc.aliyun.com/helm_repositories/26125-play-helm --username=$HELM_USERNAME --password=$HELM_PASSWORD  --version=$GIT_COMMIT'
         }
       }
     }
