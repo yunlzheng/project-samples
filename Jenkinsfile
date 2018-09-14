@@ -9,9 +9,11 @@ pipeline {
     }
 
     stage('public') {
+      steps {
         withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
           sh 'docker push yunlzheng/spring-sample'
         }
+      }
     }
   }
 }
