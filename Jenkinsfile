@@ -5,7 +5,7 @@ pipeline {
       steps {
 
         dir('containerization-spring-with-helm') {
-          docker build -t yunlzheng/spring-sample:$GIT_COMMIT .
+          sh 'docker build -t yunlzheng/spring-sample:$GIT_COMMIT .'
         }
 
       }
