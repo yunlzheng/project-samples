@@ -32,6 +32,14 @@ pipeline {
           writeYaml file: filename, data: data
         }
 
+        script {
+          def filename = 'containerization-spring-with-helm/chart/Chart.yaml'
+          def data = readYaml file: filename
+          data.version = env.GIT_COMMIT
+          sh "rm $filename"
+          writeYaml file: filename, data: data
+        }
+
       }
     }
 
