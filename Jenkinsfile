@@ -40,7 +40,7 @@ pipeline {
         dir('containerization-spring-with-helm') {
           dir('chart') {
             sh 'helm lint'
-            sh 'helm upgrade --install --name=spring-app .'
+            sh 'helm upgrade spring-app --install .'
           }
         }
       }
