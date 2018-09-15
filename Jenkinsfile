@@ -74,18 +74,30 @@ pipeline {
         input 'Do you approve production?'
 
         script {                
-            env.RELEASE = input message: 'User input required',
-            ok: 'Deploy!',
+            env.RELEASE = input message: 'Please input the release version',
+            ok: 'Deploy',
             parameters: [
-              [$class: 'TextParameterDefinition', defaultValue: '0.0.1', description: 'RELEASE', name: 'RELEASE']
+              [$class: 'TextParameterDefinition', defaultValue: '0.0.1', description: 'Cureent release version', name: 'release']
             ]
+        }
+
+        echo 'Deploy and release: $RELEASE'
+
+        script {
+          def filename = 'containerization-spring-with-helm/chart/Chart.yaml'
+          def data = readYaml file: filename
+          data.version = env.RELEASE
+          sh "rm $filename"
+          writeYaml file: filename, data: data
         }
 
         dir('containerization-spring-with-helm') {
           dir('chart') {
+            sh 'helm lint'
             sh 'helm upgrade spring-app-prod --install --namespace=production --set ingress.host=production.spring-example.local .'
           }
         }
+
       }
     }
 
