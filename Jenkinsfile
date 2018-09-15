@@ -48,9 +48,8 @@ pipeline {
       }
     }
 
-    input 'Do you approve deployment dev?'
-
     stage('Deploy To Dev') {
+      input 'Do you approve deployment dev?'
       steps {
         dir('containerization-spring-with-helm') {
           dir('chart') {
@@ -60,9 +59,8 @@ pipeline {
       }
     }
 
-    input 'Do you approve staging?'
-
     stage('Deploy To Stageing') {
+      input 'Do you approve staging?'
       steps {
         dir('containerization-spring-with-helm') {
           dir('chart') {
@@ -72,9 +70,8 @@ pipeline {
       }
     }
 
-    input 'Do you approve production?'
-
     stage('Deploy To Production') {
+      input 'Do you approve production?'
       steps {
         dir('containerization-spring-with-helm') {
           dir('chart') {
