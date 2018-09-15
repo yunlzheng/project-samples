@@ -35,7 +35,7 @@ pipeline {
         script {
           def filename = 'containerization-spring-with-helm/chart/Chart.yaml'
           def data = readYaml file: filename
-          data.version = '0.1.0.'+env.GIT_COMMIT
+          data.version = env.GIT_COMMIT
           sh "rm $filename"
           writeYaml file: filename, data: data
         }
@@ -57,7 +57,7 @@ pipeline {
     stage('public helm') {
       steps {
         dir('containerization-spring-with-helm') {
-          sh 'helm push chart https://repomanage.rdc.aliyun.com/helm_repositories/26125-play-helm --username=$HELM_USERNAME --password=$HELM_PASSWORD  --version=0.0.1.$GIT_COMMIT'
+          sh 'helm push chart https://repomanage.rdc.aliyun.com/helm_repositories/26125-play-helm --username=$HELM_USERNAME --password=$HELM_PASSWORD  --version=$GIT_COMMIT'
         }
       }
     }
