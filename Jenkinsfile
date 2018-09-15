@@ -50,7 +50,6 @@ pipeline {
 
     stage('Deploy To Dev') {
       steps {
-        input 'Do you approve deployment dev?'
         dir('containerization-spring-with-helm') {
           dir('chart') {
             sh 'helm upgrade spring-app --install --namespace dev --set ingress.path=/staging .'
