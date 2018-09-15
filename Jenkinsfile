@@ -72,6 +72,15 @@ pipeline {
     stage('Deploy To Production') {
       steps {
         input 'Do you approve production?'
+
+        script {                
+            env.RELEASE = input message: 'User input required',
+            ok: 'Deploy!',
+            parameters: [
+              [$class: 'TextParameterDefinition', defaultValue: '0.0.1', description: 'RELEASE', name: 'RELEASE']
+            ]
+        }
+
         dir('containerization-spring-with-helm') {
           dir('chart') {
             sh 'helm upgrade spring-app-prod --install --namespace=production --set ingress.host=production.spring-example.local .'
