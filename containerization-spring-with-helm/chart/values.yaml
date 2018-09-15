@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: yunlzheng/yunlzheng/spring-sample
+  repository: yunlzheng/spring-sample
   tag: latest
   pullPolicy: IfNotPresent
 
