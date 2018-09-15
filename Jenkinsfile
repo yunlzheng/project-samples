@@ -52,7 +52,7 @@ pipeline {
       steps {
         dir('containerization-spring-with-helm') {
           dir('chart') {
-            sh 'helm upgrade spring-app --install --namespace dev --set ingress.path=/staging .'
+            sh 'helm upgrade spring-app --install --namespace dev --set ingress.path=/dev .'
           }
         }
       }
