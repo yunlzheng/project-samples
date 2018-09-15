@@ -49,8 +49,8 @@ pipeline {
     }
 
     stage('Deploy To Dev') {
-      input 'Do you approve deployment dev?'
       steps {
+        input 'Do you approve deployment dev?'
         dir('containerization-spring-with-helm') {
           dir('chart') {
             sh 'helm upgrade spring-app --install --namespace dev .'
@@ -60,8 +60,8 @@ pipeline {
     }
 
     stage('Deploy To Stageing') {
-      input 'Do you approve staging?'
       steps {
+        input 'Do you approve staging?'
         dir('containerization-spring-with-helm') {
           dir('chart') {
             sh 'helm upgrade spring-app --install --namespace staging .'
@@ -71,8 +71,8 @@ pipeline {
     }
 
     stage('Deploy To Production') {
-      input 'Do you approve production?'
       steps {
+        input 'Do you approve production?'
         dir('containerization-spring-with-helm') {
           dir('chart') {
             sh 'helm upgrade spring-app --install --namespace production .'
