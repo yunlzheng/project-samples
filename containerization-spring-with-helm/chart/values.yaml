@@ -14,8 +14,7 @@ ingress:
   annotations: 
     nginx.ingress.kubernetes.io/rewrite-target: /
   path: /
-  hosts:
-    - spring-example.local
+  host: spring-example.local
   tls: []
 
 resources: {}
