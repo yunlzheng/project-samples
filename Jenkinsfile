@@ -52,7 +52,7 @@ pipeline {
       steps {
         dir('containerization-spring-with-helm') {
           dir('chart') {
-            sh 'helm upgrade spring-app --install --namespace dev --set ingress.path=/dev .'
+            sh 'helm upgrade spring-app --install --namespace=dev --set ingress.enabled=false .'
           }
         }
       }
@@ -63,7 +63,7 @@ pipeline {
         input 'Do you approve staging?'
         dir('containerization-spring-with-helm') {
           dir('chart') {
-            sh 'helm upgrade spring-app --install --namespace staging --set ingress.path=/staging .'
+            sh 'helm upgrade spring-app --install --namespace=staging --set ingress.enabled=false .'
           }
         }
       }
@@ -74,7 +74,7 @@ pipeline {
         input 'Do you approve production?'
         dir('containerization-spring-with-helm') {
           dir('chart') {
-            sh 'helm upgrade spring-app --install --namespace production .'
+            sh 'helm upgrade spring-app --install --namespace=production .'
           }
         }
       }
