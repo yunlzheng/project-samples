@@ -7,7 +7,8 @@ pipeline {
   }
 
   stages {
-    stage('build') {
+
+    stage('Build And Test') {
       steps {
 
         dir('containerization-spring-with-helm') {
@@ -17,7 +18,7 @@ pipeline {
       }
     }
 
-    stage('push image') {
+    stage('Publish Docker And Helm') {
       steps {
 
         withDockerRegistry([credentialsId: 'dockerhub', url: '']) {
@@ -40,24 +41,45 @@ pipeline {
           writeYaml file: filename, data: data
         }
 
+        dir('containerization-spring-with-helm') {
+          sh 'helm push chart https://repomanage.rdc.aliyun.com/helm_repositories/26125-play-helm --username=$HELM_USERNAME --password=$HELM_PASSWORD  --version=$GIT_COMMIT'
+        }
+
       }
     }
 
-    stage('deploy/update helm') {
+    input 'Do you approve deployment dev?'
+
+    stage('Deploy To Dev') {
       steps {
         dir('containerization-spring-with-helm') {
           dir('chart') {
-            // sh 'helm lint'
-            sh 'helm upgrade spring-app --install .'
+            sh 'helm upgrade spring-app --install --namespace dev .'
           }
         }
       }
     }
 
-    stage('public helm') {
+    input 'Do you approve staging?'
+
+    stage('Deploy To Stageing') {
       steps {
         dir('containerization-spring-with-helm') {
-          sh 'helm push chart https://repomanage.rdc.aliyun.com/helm_repositories/26125-play-helm --username=$HELM_USERNAME --password=$HELM_PASSWORD  --version=$GIT_COMMIT'
+          dir('chart') {
+            sh 'helm upgrade spring-app --install --namespace staging .'
+          }
+        }
+      }
+    }
+
+    input 'Do you approve production?'
+
+    stage('Deploy To Production') {
+      steps {
+        dir('containerization-spring-with-helm') {
+          dir('chart') {
+            sh 'helm upgrade spring-app --install --namespace production .'
+          }
         }
       }
     }
